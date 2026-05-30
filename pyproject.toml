@@ -1,0 +1,42 @@
+[project]
+name = "transactable-agentpay-mcp"
+version = "0.1.0"
+description = "MCP server for the Transactable provenance registry. Lets MCP-aware agents (Claude Cowork, Claude Code, Cursor, Goose, etc.) register AI-generated work via Alchemy AgentPay (x402)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [
+    { name = "Transactable", email = "dev@transactable.com" },
+]
+keywords = ["mcp", "x402", "agentpay", "provenance", "ai", "copyright"]
+
+dependencies = [
+    "mcp[cli]>=1.2.0",
+    "httpx>=0.27.0",
+    "pydantic>=2.5.0",
+    # x402 client + EVM signing for the 402-and-retry handshake.
+    # 2.10+ understands Alchemy's CAIP-2 network IDs (eip155:84532, etc.).
+    "x402>=2.10.0",
+    "eth-account>=0.13.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.5.0",
+]
+
+[project.scripts]
+transactable-agentpay-mcp = "transactable_agentpay.server:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/transactable_agentpay"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
