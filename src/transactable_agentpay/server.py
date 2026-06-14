@@ -457,7 +457,7 @@ async def transactable_lookup_registration(params: LookupInput) -> str:
             "certificate_url": "..." | null,
             "nft_transaction_hash": "..." | null,
             "nft_token_id": <int|null>,
-            "examination_summary": {"copyrightability": bool, "monetization": bool, "ai_flag": bool} | null
+            "examination_summary": {"copyrightability": bool, "ai_flag": bool} | null
           }
     '''
     client = _client()
@@ -518,7 +518,6 @@ async def transactable_lookup_registration(params: LookupInput) -> str:
                 '',
                 '## AI examination',
                 f'- Copyrightability: {summary.get("copyrightability")}',
-                f'- Monetization: {summary.get("monetization")}',
                 f'- AI-generated flag: {summary.get("ai_flag")}',
             ]
         if b.get('_poll_timed_out'):
